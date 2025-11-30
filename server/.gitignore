@@ -1,0 +1,61 @@
+# ⛔ Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ⛔ TypeScript build folder
+dist/
+build/
+out/
+
+# ⛔ Environment files
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# ⛔ Multer upload folder
+uploads/
+uploads/*
+
+# ⛔ Logs
+logs/
+*.log
+log/
+debug.log
+error.log
+
+# ⛔ System files
+.DS_Store
+Thumbs.db
+
+# ⛔ VSCode settings
+.vscode/
+
+# ⛔ Cache
+.cache/
+.eslintcache
+.parcel-cache/
+
+# ⛔ Temporary files
+tmp/
+temp/
+*.tmp
+
+# ⛔ Coverage output
+coverage/
+
+# ⛔ PM2 logs
+pm2-logs/
+pids/
+
+# ⛔ MongoDB dump
+dump/
+
+# ⛔ OS files
+.idea/
+.swp
+*.swp

@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    // Project structure
+    "rootDir": "src",
+    "outDir": "dist",
+    // Module system & target
+    "module": "commonjs",
+    "target": "ES5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    // Type checking
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    // Output options
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    // React JSX (if you use React)
+    "jsx": "react-jsx",
+    // Misc
+    "skipLibCheck": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "src",
+    "src/basenn/common_Schema/common_Model",
+    "src/Base/Base_Model/commonSchema.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
