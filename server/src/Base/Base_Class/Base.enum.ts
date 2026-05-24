@@ -1,6 +1,7 @@
 export enum USERROLE {
     ADMIN = 'ADMIN',
-    STUDENT ='STUDENT',
+    STUDENT = 'STUDENT',
     TEACHER = 'TEACHER',
     HOD = 'HOD',
+    SUPERADMIN = 'SUPERADMIN'
 }

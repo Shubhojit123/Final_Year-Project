@@ -6,13 +6,13 @@ export const getStudentMarks = async (req: any, res: any) => {
     try {
         const { studentId, semesterId } = req.body;
 
+        const query: any = { studentId: new mongoose.Types.ObjectId(studentId) };
+        if (semesterId) {
+            query.semester = new mongoose.Types.ObjectId(semesterId);
+        }
+
         const data = await MarkModel.aggregate([
-            {
-                $match: {
-                    studentId: new mongoose.Types.ObjectId(studentId),
-                    semester: new mongoose.Types.ObjectId(semesterId)
-                }
-            },
+            { $match: query },
             {
                 $lookup: {
                     from: "subject",
@@ -21,12 +21,7 @@ export const getStudentMarks = async (req: any, res: any) => {
                     as: "subject"
                 }
             },
-            {
-                $unwind: {
-                    path: "$subject",
-                    preserveNullAndEmptyArrays: true
-                }
-            },
+            { $unwind: "$subject" },
             {
                 $lookup: {
                     from: "sem",
@@ -35,17 +30,16 @@ export const getStudentMarks = async (req: any, res: any) => {
                     as: "semesterInfo"
                 }
             },
-            {
-                $unwind: {
-                    path: "$semesterInfo",
-                    preserveNullAndEmptyArrays: true
-                }
-            },
+            { $unwind: "$semesterInfo" },
             {
                 $project: {
                     _id: 1,
+                    ct1: 1,
+                    ct2: 1,
+                    ct3: 1,
                     marksObtained: 1,
                     totalMarks: 1,
+                    grade: 1,
                     percentage: {
                         $multiply: [
                             { $divide: ["$marksObtained", "$totalMarks"] },
@@ -55,6 +49,7 @@ export const getStudentMarks = async (req: any, res: any) => {
                     subjectName: "$subject.name",
                     subjectCode: "$subject.code",
                     semesterName: "$semesterInfo.name",
+                    semesterId: "$semesterInfo._id",
                     createdAt: 1
                 }
             }

@@ -7,6 +7,7 @@ import { decoded, generateToken } from "../../config/jwtConfig";
 import { IBatch, ISem, ISubject, ITeacherAssign, IYear } from "./hod.model";
 import { batchService, semService, subjectService, teacherAssignService, yearService } from "./hod.service";
 import * as xlsx from "xlsx";
+import * as bcrypt from "bcryptjs";
 
 export class yearController extends BaseController<IYear> {
     constructor() {
@@ -37,6 +38,26 @@ export class subjectController extends BaseController<ISubject> {
 export class teacherAssignController extends BaseController<ITeacherAssign> {
     constructor() {
         super(new teacherAssignService());
+    }
+
+    async getAllTeachers(req: any, res: any) {
+        try {
+            // Use department from authenticated HOD user
+            const department_id = req.user?.department?._id || req.user?.department;
+            
+            if (!department_id) {
+                return ApiResponse.error(res, "Department not found for this HOD");
+            }
+
+            const teachers = await UserModel.find({ 
+                role: USERROLE.TEACHER, 
+                department: department_id 
+            });
+            
+            return ApiResponse.success(res, "Teachers fetched successfully", teachers);
+        } catch (error: any) {
+            return ApiResponse.error(res, error.message || "Failed to fetch teachers");
+        }
     }
 }
 
@@ -82,11 +103,11 @@ export const studentCreate = async (req: any, res: any) => {
                     results.errors.push(`Missing fields for: ${data?.email || 'unknown'}`);
                     continue;
                 }
-
+                const password = await bcrypt.hash(data.dob, 10);
                 const userData = {
                     username: data.name,
                     email: data.email,
-                    password: data.dob,
+                    password: password,
                     role: USERROLE.STUDENT,
                     department: department_id,
                     batch: batch_id
@@ -230,6 +251,8 @@ export const inviteTeacher = async (req: any, res: any) => {
         return ApiResponse.error(res, error.message || "Something went wrong");
     }
 };
+
+
 
 export const decodeInviteToken = async (req: any, res: any) => {
     try {

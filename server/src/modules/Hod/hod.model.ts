@@ -15,7 +15,7 @@ export class IYear {
     @prop({required:true})
     public name!: string;
 
-    @prop({required:true, ref:()=> 'departments' , type: ()=> mongoose.Types.ObjectId})
+    @prop({required:true, ref: 'IDepartment' , type: ()=> mongoose.Types.ObjectId})
     public department !: Ref<typeof DepartmentModel>
 
 }
@@ -34,10 +34,10 @@ export class IBatch {
     @prop({required:true})
     public  name !: string
 
-    @prop({required:true,ref:()=>'departments',type:()=>mongoose.Types.ObjectId})
+    @prop({required:true,ref: 'IDepartment',type:()=>mongoose.Types.ObjectId})
     public department !: Ref<typeof DepartmentModel>
 
-    @prop({required:true,ref:()=>'year',type:()=>mongoose.Types.ObjectId})
+    @prop({required:true,ref: 'IYear',type:()=>mongoose.Types.ObjectId})
     public year !: Ref<typeof YearModel>
 }
 
@@ -54,7 +54,7 @@ export class  ISem {
     @prop({required:true})
     public name !: string;
 
-    @prop({required:true, ref:()=>'departments', type:()=>mongoose.Types.ObjectId})
+    @prop({required:true, ref: 'IDepartment', type:()=>mongoose.Types.ObjectId})
     public department !: Ref<typeof DepartmentModel>;
 
 }
@@ -76,10 +76,10 @@ export class ISubject {
     @prop({required:true})
     public code !: string;
 
-    @prop({required:true, ref:()=>'departments', type:()=>mongoose.Types.ObjectId})
+    @prop({required:true, ref: 'IDepartment', type:()=>mongoose.Types.ObjectId})
     public department !: Ref<typeof DepartmentModel>;
 
-    @prop({required:true, ref:()=>'sem', type:()=>mongoose.Types.ObjectId})
+    @prop({required:true, ref: 'ISem', type:()=>mongoose.Types.ObjectId})
     public sem !: Ref<typeof SemModel>;
 }
 
@@ -94,13 +94,13 @@ export const SubjectModel = getModelForClass(ISubject);
 })
 
 export class ITeacherAssign {
-    @prop({ required: true, ref: () => 'users', type: () => mongoose.Types.ObjectId })
+    @prop({ required: true, ref: 'IUser', type: () => mongoose.Types.ObjectId })
     public teacher !: Ref<typeof  UserModel>;
 
-    @prop({ required: true, ref: () => 'subject', type: () => mongoose.Types.ObjectId })
+    @prop({ required: true, ref: 'ISubject', type: () => mongoose.Types.ObjectId })
     public subject !: Ref<typeof SubjectModel>;
 
-    @prop({ required: true, ref: () => 'batch', type: () => mongoose.Types.ObjectId })
+    @prop({ required: true, ref: 'IBatch', type: () => mongoose.Types.ObjectId })
     public batch !: Ref<typeof BatchModel>;
 }
 

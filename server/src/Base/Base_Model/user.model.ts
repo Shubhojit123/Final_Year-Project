@@ -24,11 +24,11 @@ export class IUser {
     @prop({ required: true, enum: Object.values(USERROLE), default: USERROLE.STUDENT })
     role!: USERROLE;
 
-    @prop({ default: null, ref:()=> 'departments', type: ()=> mongoose.Types.ObjectId})
+    @prop({ default: null, ref: 'IDepartment', type: () => mongoose.Types.ObjectId})
     public department !: Ref<typeof DepartmentModel>
 
-    @prop({required:false,ref:()=>'batch',type:()=>mongoose.Types.ObjectId})
+    @prop({required:false,ref: 'IBatch',type:()=>mongoose.Types.ObjectId})
     public batch !: Ref<typeof BatchModel>
 }
 
-export const UserModel = getModelForClass(IUser); 
+export const UserModel = getModelForClass(IUser);

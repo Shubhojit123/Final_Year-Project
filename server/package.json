@@ -12,18 +12,22 @@
   "description": "",
   "dependencies": {
     "@typegoose/typegoose": "^12.20.0",
+    "@types/bcryptjs": "^3.0.0",
     "amqplib": "^0.10.9",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mjml": "^4.17.1",
     "mongoose": "^8.19.4",
     "multer": "^2.0.2",
-    "nodemailer": "^7.0.11",
+    "nodemailer": "^7.0.13",
     "resend": "^6.5.2",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.0.0",

@@ -39,9 +39,9 @@ export class BaseController<T> {
   handelGetAll = async(req:Request,res:Response) =>{
     try {
         const data = await this.service.getAll();
-        ApiResponse.success(res,data);
+        ApiResponse.success(res, "Fetched successfully", data);
     } catch (error:any) {
-        ApiResponse.error(res, "Error in handleCreate", error.message, 500);
+        ApiResponse.error(res, "Error in handleGetAll", error.message, 500);
     }
   }
 

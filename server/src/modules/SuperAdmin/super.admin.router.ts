@@ -1,7 +1,13 @@
 import { Router } from "express";
 import { CollegeController, UserController } from "./superAdmin.controller";
+import { verifyToken, authorizeRoles } from "../../middlewares/auth.middleware";
+import { USERROLE } from "../../Base/Base_Class/Base.enum";
 
 const router = Router();
+
+router.use(verifyToken);
+router.use(authorizeRoles(USERROLE.SUPERADMIN));
+
 const CollegeControllerI = new CollegeController();
 const UserControllerI = new UserController();
 

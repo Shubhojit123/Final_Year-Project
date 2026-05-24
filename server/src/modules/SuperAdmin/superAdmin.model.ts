@@ -13,7 +13,7 @@ export class ICollege {
     @prop({required:true, unique:true})
     public name !: string; 
 
-    @prop({required:false,ref:'users',type:()=>mongoose.Types.ObjectId})
+    @prop({required:false,ref:()=> 'IUser',type:()=>mongoose.Types.ObjectId})
     public adminId !: Ref<typeof UserModel>
 }
 
